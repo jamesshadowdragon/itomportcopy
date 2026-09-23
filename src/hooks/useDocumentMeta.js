@@ -1,38 +1,31 @@
 import { useEffect, useRef } from 'react';
 import { useScene } from '../context/SceneContext';
 
-/**
- * useDocumentMeta — Dynamic Meta Tags & Virtual Routing (History API)
- *
- * Updates the browser URL, page title, and meta description
- * whenever the user enters/exits a 3D room.
- */
-
 const ROOM_META = {
     null: {
         path: '/',
-        title: 'LogicNest — Creative 3D Portfolio',
-        description: 'LogicNest is a creative digital studio building immersive web experiences, interactive UI systems, and polished product launches.',
+        title: 'LogicNest — Creative 3D Studio',
+        description: 'LogicNest builds immersive web experiences, interactive product showcases, and bold digital experiences with React, 3D, and motion design.',
     },
     about: {
         path: '/about',
-        title: 'About — LogicNest',
-        description: 'Learn about LogicNest, a creative studio building immersive web experiences and digital products.',
+        title: 'About LogicNest',
+        description: 'Learn about LogicNest, a creative digital studio crafting immersive web experiences, product launches, and modern interactive brand experiences.',
     },
     gallery: {
         path: '/gallery',
-        title: 'Projects — LogicNest',
-        description: 'Explore LogicNest projects, product builds, and design experiments in an interactive 3D gallery.',
+        title: 'LogicNest Projects',
+        description: 'Explore LogicNest projects, product concepts, and interactive web experiences designed for ambitious brands and modern launches.',
     },
     studio: {
         path: '/studio',
-        title: 'Studio — LogicNest',
-        description: 'Inside the LogicNest studio: product launches, creative builds, and content from the team.',
+        title: 'LogicNest Studio',
+        description: 'Explore the LogicNest studio, where product design, motion, UI, and 3D experiences come together in custom digital experiences.',
     },
     contact: {
         path: '/contact',
-        title: 'Contact — LogicNest',
-        description: 'Connect with LogicNest on Discord, GitHub, YouTube, and project links.',
+        title: 'Contact LogicNest',
+        description: 'Get in touch with LogicNest for web design, product experiences, UI systems, and immersive front-end builds.',
     },
 };
 
@@ -61,9 +54,7 @@ export function useDocumentMeta() {
         document.title = meta.title;
 
         const descTag = document.querySelector('meta[name="description"]');
-        if (descTag) {
-            descTag.setAttribute('content', meta.description);
-        }
+        if (descTag) descTag.setAttribute('content', meta.description);
 
         const ogTitle = document.querySelector('meta[property="og:title"]');
         if (ogTitle) ogTitle.setAttribute('content', meta.title);
@@ -72,12 +63,10 @@ export function useDocumentMeta() {
         if (ogDesc) ogDesc.setAttribute('content', meta.description);
 
         const ogUrl = document.querySelector('meta[property="og:url"]');
-        if (ogUrl) ogUrl.setAttribute('content', `https://logicnest.dev${meta.path}`);
+        if (ogUrl) ogUrl.setAttribute('content', `https://logicnestmodel.vercel.app${meta.path}`);
 
         const canonicalTag = document.querySelector('link[rel="canonical"]');
-        if (canonicalTag) {
-            canonicalTag.setAttribute('href', `https://logicnest.dev${meta.path}`);
-        }
+        if (canonicalTag) canonicalTag.setAttribute('href', `https://logicnestmodel.vercel.app${meta.path}`);
 
         if (!isHandlingPopState.current && lastPushedRoom.current !== currentRoom) {
             if (lastPushedRoom.current === undefined) {

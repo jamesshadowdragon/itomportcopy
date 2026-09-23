@@ -17,36 +17,36 @@ const WAVE_LAYERS = 4;
 export const AUDIO_SETTINGS = {
     volume: 2,
     distance: 2,
-    rolloff: 1.2
+    rolloff: 1.2,
 };
 
 export const LATARNIA_SETTINGS = {
     position: [-10, 5, -20],
     rotation: [0, 0.1, 0],
-    scale: [4.49, 5]
+    scale: [4.49, 5],
 };
 
 export const STATEK_SETTINGS = {
     position: [0, 1.6, -15],
     rotation: [0, -0.2, 0],
-    scale: [3.35, 1.3]
+    scale: [3.35, 1.3],
 };
 
 const CAMERA_SETTINGS = {
     lookDownAngle: -1.2,
     forceCenterY: -1.05,
     forceStraightZ: 0,
-    lerpSpeed: 2.5
+    lerpSpeed: 2.5,
 };
 
 const PHASE = {
     ENTERING: 'entering',
-    LOOKING_DOWN: 'looking_down',
+    LOOKING_DOWN: 'look_down',
     WRITING: 'writing',
     ROLLING: 'rolling',
     HOLDING: 'holding',
     THROWING: 'throwing',
-    DONE: 'done'
+    DONE: 'done',
 };
 
 const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
@@ -104,7 +104,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         dirZ: -0.1,
         startDist: -5.0,
         endDist: 55.0,
-        noiseAxes: 'yz'
+        noiseAxes: 'yz',
     });
 
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -136,7 +136,6 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const FRAMES_TO_WAIT = 5;
     const [currentPhase, setCurrentPhase] = useState(PHASE.ENTERING);
     const [showSelection, setShowSelection] = useState(true);
-
     const hasAnimatedDown = useRef(false);
     const hasExitTriggered = useRef(false);
     if (isExiting && !hasExitTriggered.current) {
@@ -175,14 +174,14 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     }, [showRoom]);
 
     const handleMailSelect = () => {
-        window.location.href = 'mailto:logicnestxvoidlure@gmail.com';
+        window.open('https://discord.com/users/logicnestt', '_blank');
     };
 
     useFrame((state, delta) => {
         updateRoomOrigin(groupRef);
 
         if (!hasSignaledReady.current) {
-            frameCount.current++;
+            frameCount.current += 1;
             if (frameCount.current >= FRAMES_TO_WAIT) {
                 hasSignaledReady.current = true;
                 onReady?.();
@@ -221,8 +220,11 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     });
 
     const [isMobile, setIsMobile] = useState(false);
+
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 1000);
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 1000);
+        };
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
@@ -271,8 +273,8 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 position={isMobile ? [-1.2, 0.5, -10] : [-3, 0.5, -10]}
                 rotation={[0, 0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="DISCORD"
-                onClick={() => window.open('https://discord.com/users/logicnestt', '_blank')}
+                label="GITHUB"
+                onClick={() => window.open('https://github.com/logicnestxvoidlure', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
@@ -280,8 +282,8 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 position={isMobile ? [-1.5, -0.3, -7] : [-5, -0.3, -8]}
                 rotation={[0, 0.3, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="GITHUB"
-                onClick={() => window.open('https://github.com/logicnestxvoidlure', '_blank')}
+                label="DISCORD"
+                onClick={() => window.open('https://discord.com/users/logicnestt', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
@@ -289,8 +291,8 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 position={isMobile ? [1.2, 0.5, -10] : [3, 0.5, -10]}
                 rotation={[0, -0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="YOUTUBE"
-                onClick={() => window.open('https://www.youtube.com/@logicnesstt', '_blank')}
+                label="MODELS"
+                onClick={() => window.open('https://logicnestmodel.vercel.app/', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
@@ -298,8 +300,8 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 position={isMobile ? [1.5, -0.3, -7] : [5, -0.3, -8]}
                 rotation={[0, -0.3, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="PROJECTS"
-                onClick={() => window.open('https://logicnestmodel.vercel.app/', '_blank')}
+                label="UI"
+                onClick={() => window.open('https://logicnestui.vercel.app/', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
@@ -307,16 +309,13 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 position={isMobile ? [0, -0.7, -6] : [0, -0.7, -7]}
                 rotation={[0, 0, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="MAIL"
+                label="MESSAGE"
                 onClick={handleMailSelect}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
 
-            <mesh
-                position={[0, 0.05, 1.8]}
-                rotation={[-Math.PI / 2, 0, 0]}
-            >
+            <mesh position={[0, 0.05, 1.8]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[2.5, 7]} />
                 <meshBasicMaterial
                     map={moloTexture}
@@ -328,10 +327,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 />
             </mesh>
 
-            <mesh
-                position={LATARNIA_SETTINGS.position}
-                rotation={LATARNIA_SETTINGS.rotation}
-            >
+            <mesh position={LATARNIA_SETTINGS.position} rotation={LATARNIA_SETTINGS.rotation}>
                 <planeGeometry args={LATARNIA_SETTINGS.scale} />
                 <meshBasicMaterial color="#e0e0e0"
                     map={latarniaTexture}
@@ -342,11 +338,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 />
             </mesh>
 
-            <mesh
-                ref={statekRef}
-                position={STATEK_SETTINGS.position}
-                rotation={STATEK_SETTINGS.rotation}
-            >
+            <mesh ref={statekRef} position={STATEK_SETTINGS.position} rotation={STATEK_SETTINGS.rotation}>
                 <planeGeometry args={STATEK_SETTINGS.scale} />
                 <meshBasicMaterial color="#e0e0e0"
                     map={statekTexture}
